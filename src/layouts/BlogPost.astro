@@ -1,0 +1,171 @@
+---
+import Layout from './Layout.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  tags?: string[];
+  author?: string;
+}
+
+const { title, description, pubDate, updatedDate, tags, author = 'Anonymous' } = Astro.props;
+
+const formattedPubDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={`${title} | LogPulse Blog`} description={description}>
+  <article>
+    <!-- Hero Section -->
+    <div class="relative bg-gray-950 overflow-hidden border-b border-gray-800/60">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-cyan-500/8 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-1/4 w-64 h-64 bg-emerald-500/8 rounded-full blur-3xl"></div>
+      </div>
+      <div class="absolute inset-0 opacity-[0.03]"
+        style="background-image: linear-gradient(to right, #06b6d4 1px, transparent 1px), linear-gradient(to bottom, #06b6d4 1px, transparent 1px); background-size: 48px 48px;">
+      </div>
+
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <a href="/blog" class="inline-flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors mb-8 group">
+          <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          <span class="text-sm font-medium">Back to Blog</span>
+        </a>
+
+        {tags && tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-4">
+            {tags.map(tag => (
+              <span class="px-3 py-1 text-xs font-mono font-medium text-cyan-400 bg-cyan-500/10 rounded-md border border-cyan-500/20">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+          {title}
+        </h1>
+
+        <p class="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
+          {description}
+        </p>
+
+        <div class="flex flex-wrap items-center gap-5 text-sm">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-white font-bold text-xs shadow-lg shadow-cyan-500/20">
+              {author.charAt(0).toUpperCase()}
+            </div>
+            <span class="font-medium text-gray-300">{author}</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-gray-500">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <time datetime={pubDate.toISOString()}>{formattedPubDate}</time>
+          </div>
+          {formattedUpdatedDate && (
+            <div class="flex items-center gap-1.5 text-gray-600 text-xs">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              Updated {formattedUpdatedDate}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="bg-gray-950">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-12">
+          <!-- Main Content -->
+          <div class="prose prose-invert prose-lg max-w-none
+            prose-headings:font-bold prose-headings:text-white
+            prose-h1:text-3xl prose-h1:mt-0
+            prose-h2:text-2xl prose-h2:border-b prose-h2:border-gray-800 prose-h2:pb-3 prose-h2:text-gray-100
+            prose-h3:text-xl prose-h3:text-gray-200
+            prose-p:text-gray-400 prose-p:leading-relaxed
+            prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-gray-200
+            prose-code:text-emerald-400 prose-code:bg-gray-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:border prose-code:border-gray-700/60
+            prose-pre:bg-gray-900 prose-pre:rounded-xl prose-pre:shadow-xl prose-pre:border prose-pre:border-gray-700/60
+            prose-blockquote:border-l-cyan-500 prose-blockquote:bg-cyan-500/5 prose-blockquote:py-1 prose-blockquote:text-gray-400
+            prose-ul:text-gray-400 prose-ol:text-gray-400
+            prose-li:my-1
+            prose-table:text-gray-400
+            prose-th:text-gray-300 prose-th:bg-gray-900
+            prose-td:border-gray-800
+            prose-img:rounded-xl prose-img:shadow-xl prose-img:border prose-img:border-gray-800">
+            <slot />
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="hidden lg:block">
+            <div class="sticky top-24 space-y-4">
+              <!-- Author Card -->
+              <div class="bg-gray-900/60 rounded-2xl p-5 border border-gray-800/60">
+                <h3 class="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">Author</h3>
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-white font-bold shadow-lg shadow-cyan-500/20">
+                    {author.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-200 text-sm">{author}</p>
+                    <p class="text-xs text-gray-600">LogPulse Engineering</p>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-500 leading-relaxed">Writing about reliability, observability, and the art of not getting paged at 3 AM.</p>
+              </div>
+
+              <!-- Tags -->
+              {tags && tags.length > 0 && (
+                <div class="bg-gray-900/60 rounded-2xl p-5 border border-gray-800/60">
+                  <h3 class="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-3">Topics</h3>
+                  <div class="flex flex-wrap gap-2">
+                    {tags.map(tag => (
+                      <span class="px-2.5 py-1 text-xs font-mono text-cyan-400 bg-cyan-500/10 rounded-md border border-cyan-500/20">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- CTA -->
+              <div class="bg-gradient-to-br from-cyan-500/10 to-emerald-500/5 rounded-2xl p-5 border border-cyan-500/20">
+                <h3 class="text-sm font-bold text-white mb-2">Start monitoring free</h3>
+                <p class="text-xs text-gray-400 mb-4 leading-relaxed">Set up job monitoring and log streaming in under 5 minutes.</p>
+                <a href="/" class="block w-full py-2.5 text-xs font-bold text-center text-gray-950 bg-gradient-to-r from-cyan-400 to-emerald-400 rounded-lg hover:from-cyan-300 hover:to-emerald-300 transition-all duration-200">
+                  Get Started Free
+                </a>
+              </div>
+
+              <!-- Back -->
+              <a href="/blog" class="flex items-center justify-center gap-2 w-full px-4 py-3 text-sm font-medium text-gray-500 bg-gray-900/60 border border-gray-800/60 rounded-xl hover:text-gray-200 hover:border-gray-700 transition-all duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                All Articles
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
