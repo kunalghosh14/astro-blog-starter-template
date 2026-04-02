@@ -80,6 +80,7 @@ const currentPath = Astro.url.pathname;
             <a
               href="#"
               class="px-4 py-2 text-sm font-semibold text-gray-950 bg-gradient-to-r from-cyan-400 to-emerald-400 rounded-lg hover:from-cyan-300 hover:to-emerald-300 transition-all duration-200 shadow-lg shadow-cyan-500/20"
+              data-confetti
             >
               Start Free
             </a>
@@ -193,6 +194,28 @@ const currentPath = Astro.url.pathname;
       if (btn && menu) {
         btn.addEventListener('click', () => menu.classList.toggle('hidden'));
       }
+    </script>
+
+    <script>
+      import confetti from 'canvas-confetti';
+
+      document.querySelectorAll('[data-confetti]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+          const x = (rect.left + rect.width / 2) / window.innerWidth;
+          const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+          confetti({
+            particleCount: 120,
+            spread: 80,
+            origin: { x, y },
+            colors: ['#22d3ee', '#34d399', '#a78bfa', '#f9a8d4', '#fde68a'],
+            startVelocity: 35,
+            gravity: 0.9,
+            scalar: 1.1,
+          });
+        });
+      });
     </script>
   </body>
 </html>
