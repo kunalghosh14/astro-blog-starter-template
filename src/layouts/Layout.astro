@@ -4,7 +4,7 @@ export interface Props {
   description?: string;
 }
 
-const { title, description = 'LogPulse — Real-time monitoring for jobs, logs, and infrastructure.' } = Astro.props;
+const { title, description = 'Pulsebeat — Real-time monitoring for jobs, logs, and infrastructure.' } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
@@ -33,7 +33,7 @@ const currentPath = Astro.url.pathname;
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
             </div>
-            <span class="font-bold text-xl text-white">Log<span class="text-cyan-400">Pulse</span></span>
+            <span class="font-bold text-xl text-white">Pulse<span class="text-cyan-400">beat</span></span>
           </a>
 
           <!-- Desktop Navigation -->
@@ -130,7 +130,7 @@ const currentPath = Astro.url.pathname;
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <span class="font-bold text-xl text-white">Log<span class="text-cyan-400">Pulse</span></span>
+              <span class="font-bold text-xl text-white">Pulse<span class="text-cyan-400">beat</span></span>
             </a>
             <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
               Real-time monitoring for jobs, logs, and infrastructure. Never miss a failure again.
@@ -178,7 +178,7 @@ const currentPath = Astro.url.pathname;
 
         <div class="mt-12 pt-8 border-t border-gray-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p class="text-gray-600 text-sm">
-            &copy; {new Date().getFullYear()} LogPulse, Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Pulsebeat, Inc. All rights reserved.
           </p>
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>

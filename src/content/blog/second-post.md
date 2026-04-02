@@ -84,7 +84,7 @@ async def correlation_middleware(request: Request, call_next):
         return response
 ```
 
-Now when you search LogPulse for `trace_id:4bf9a2c1`, you see every log event across your entire distributed system for that single user request.
+Now when you search Pulsebeat for `trace_id:4bf9a2c1`, you see every log event across your entire distributed system for that single user request.
 
 ## Log Levels: Use Them Correctly
 
