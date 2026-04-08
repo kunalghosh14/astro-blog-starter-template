@@ -36,3 +36,5 @@ Thumbs.db
 # Typescript
 *.tsbuildinfo
 
+wrangler.toml
+cloudflare-workers-evidence.md
